@@ -1,0 +1,37 @@
+<!-- html se incluye el formulario -->
+
+<div class="login">
+  <form class="custom-form" #loginForm="ngForm" (ngSubmit)="login()">
+    <h1>Entrada</h1>
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Correo"
+      required="required"
+      email
+      #emailModel="ngModel"
+    />
+
+    <div *ngIf="emailModel.invalid && emailModel.touched" class="error-message">
+      Por favor, introduce un correo electrónico válido.
+    </div>
+
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Contrasenia"
+      required
+      #passwordModel="ngModel"
+      />
+
+    <div *ngIf="passwordModel.invalid && passwordModel.touched" class="error-message">
+      La contraseña es requerida.
+    </div>
+
+
+    <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+</div>

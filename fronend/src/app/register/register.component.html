@@ -1,0 +1,45 @@
+<!-- html formulario de registro -->
+
+<div class="register">
+  <form class="custom-form" #registerForm="ngForm" (ngSubmit)="register()">
+    <h1>Registro</h1>
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Correo"
+      
+      require
+      email
+      #emailModel="ngModel"
+    />
+
+    <div *ngIf="emailModel.invalid && emailModel.touched" class="error-message">
+      Por favor, introduce un correo electrónico válido.
+    </div>
+
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Contrasenia"
+      required
+      #passwordModel="ngModel" 
+    />
+    <input
+      type="password"
+      [(ngModel)]="confirmPassword"
+      name="confirmPassword"
+      placeholder="Confirma Contrasenia"
+      required
+      #confirmPasswordModel="ngModel"
+    />
+
+    <div *ngIf="passwordModel.value !== confirmPasswordModel.value && confirmPasswordModel.touched" class="error-message">
+      Las contraseñas no coinciden.
+    </div>
+
+    <button type="submit">Registrar</button>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+</div>
